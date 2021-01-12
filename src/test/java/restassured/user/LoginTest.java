@@ -1,6 +1,8 @@
 package restassured.user;
 
-public class LoginTest {
+import restassured.BookAppApiTest;
+
+public class LoginTest extends BookAppApiTest {
 
 
 }

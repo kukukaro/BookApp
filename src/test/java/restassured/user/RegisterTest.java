@@ -6,13 +6,12 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.json.JSONObject;
 import org.junit.Test;
+import restassured.BookAppApiTest;
 
-public class RegisterTest {
+public class RegisterTest extends BookAppApiTest {
 
     @Test
     public void registerWithValidData() {
-
-        RestAssured.baseURI = "https://ta-ebookrental-be.herokuapp.com/user";
 
         JSONObject requestBody = new JSONObject();
         requestBody.put("login", "karo1");
@@ -25,7 +24,7 @@ public class RegisterTest {
                 .body(requestBody.toString())
                 .log().all()
                 .when()
-                .post("/register")
+                .post("user/register")
                 .then()
                 .statusCode(200)
                 .extract().response().prettyPrint();
@@ -47,7 +46,7 @@ public class RegisterTest {
                 .body(requestBody.toString())
                 .log().all()
                 .when()
-                .post("/register")
+                .post("user/register")
                 .then()
                 .statusCode(new ResponseCodeNot2xx())
                 .extract().response().prettyPrint();
@@ -68,7 +67,7 @@ public class RegisterTest {
                 .body(requestBody.toString())
                 .log().all()
                 .when()
-                .post("/register")
+                .post("user/register")
                 .then()
                 .statusCode(new ResponseCodeNot2xx())
                 .extract().response().prettyPrint();
@@ -90,7 +89,7 @@ public class RegisterTest {
                 .body(requestBody.toString())
                 .log().all()
                 .when()
-                .get("/register")
+                .get("user/register")
                 .then()
                 .statusCode(405)
                 .extract().response().prettyPrint();
