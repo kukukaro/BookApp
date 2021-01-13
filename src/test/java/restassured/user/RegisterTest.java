@@ -2,32 +2,47 @@ package restassured.user;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.json.JSONObject;
 import org.junit.Test;
 import restassured.BookAppApiTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class RegisterTest extends BookAppApiTest {
 
     @Test
     public void registerWithValidData() {
 
+        String userName = RandomStringUtils.randomAlphabetic(10);
+
         JSONObject requestBody = new JSONObject();
-        requestBody.put("login", "karo1");
+        requestBody.put("login", userName);
         requestBody.put("password", "karo1");
 
 
-        RestAssured
+        Response response = RestAssured
                 .given()
                 .contentType(ContentType.JSON)
+                .basePath("user")
                 .body(requestBody.toString())
                 .log().all()
                 .when()
-                .post("user/register")
+                .post("/register")
                 .then()
                 .statusCode(200)
-                .extract().response().prettyPrint();
+                .extract().response();
+
+        response.prettyPrint();
+
+        boolean isNew = response.jsonPath().getBoolean("new");
+
+        assertThat(isNew).isTrue();
 
     }
 
