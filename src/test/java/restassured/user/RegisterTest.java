@@ -85,7 +85,7 @@ public class RegisterTest extends BookAppApiTest {
         requestBody.put("login", userName);
         requestBody.put("password", "");
 
-        ValidatableResponse validatableResponse =  RestAssured
+        ValidatableResponse validatableResponse = RestAssured
                 .given()
                 .contentType(ContentType.JSON)
                 .body(requestBody.toString())
@@ -115,6 +115,83 @@ public class RegisterTest extends BookAppApiTest {
                 .get()
                 .then()
                 .statusCode(405)
+                .extract().response().prettyPrint();
+
+    }
+
+    @Test
+    public void registerVerifyDeleteMethod() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("login", "karo1");
+        requestBody.put("password", "karo1");
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(requestBody.toString())
+                .log().all()
+                .when()
+                .delete()
+                .then()
+                .statusCode(405)
+                .extract().response().prettyPrint();
+
+    }
+
+    /*Sending empty JSON object should return 400 - bad request response.
+    Instead mysterious user object with ID is returned.  */
+    @Ignore
+    @Test
+    public void checkResponseFromEmptyJsonBody() {
+
+        JSONObject emptyObject = new JSONObject();
+
+        ValidatableResponse validatableResponse = RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(emptyObject.toString())
+                .log().all()
+                .when()
+                .post()
+                .then();
+
+        validatableResponse.extract().response().prettyPrint();
+        validatableResponse.statusCode(400);
+    }
+
+    @Test
+    public void checkResponseFromEmptyBody() {
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .post()
+                .then()
+                .statusCode(400)
+                .extract().response().prettyPrint();
+    }
+
+    @Test
+    public void checkResponseFromTextContentType() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("login", "karo1");
+        requestBody.put("password", "karo1");
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.TEXT)
+                .body(requestBody.toString())
+                .log().all()
+                .when()
+                .post()
+                .then()
+                .statusCode(415)
                 .extract().response().prettyPrint();
 
     }
