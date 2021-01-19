@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "6dc78b8d-a44c-4fb1-98d6-1ae8952dbaa2",
-		"name": "BookApplication_ebookrental-be Copy",
+		"_postman_id": "cbddc348-5fe4-4cb6-88e8-644e9f02b009",
+		"name": "BookApplication_ebookrental-be",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -22,6 +22,126 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"login\": \"karo1\",\r\n    \"password\": \"karo1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ta-ebookrental-be.herokuapp.com/user/register",
+									"protocol": "https",
+									"host": [
+										"ta-ebookrental-be",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register_verify_delete_method",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": \"karo1\",\r\n    \"password\": \"karo1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ta-ebookrental-be.herokuapp.com/user/register",
+									"protocol": "https",
+									"host": [
+										"ta-ebookrental-be",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register_verify_post_method_with_empty_body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ta-ebookrental-be.herokuapp.com/user/register",
+									"protocol": "https",
+									"host": [
+										"ta-ebookrental-be",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register_verify_post_method_with_wrong_contentType",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": \"karo1\",\r\n    \"password\": \"karo1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ta-ebookrental-be.herokuapp.com/user/register",
+									"protocol": "https",
+									"host": [
+										"ta-ebookrental-be",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register_verify_post_method_with_empty_json",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
