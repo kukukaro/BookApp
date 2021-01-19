@@ -196,6 +196,27 @@ public class RegisterTest extends BookAppApiTest {
 
     }
 
+    @Test
+    public void shouldNotRegisterOnWrongRegisterEndpoint() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("login", "karo1");
+        requestBody.put("password", "karo1");
+
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(requestBody.toString())
+                .log().all()
+                .when()
+                .post("/dummy")
+                .then()
+                .statusCode(404)
+                .extract().response().prettyPrint();
+
+    }
+
     private static class ResponseCodeNot2xx extends TypeSafeMatcher<Integer> {
 
         @Override
