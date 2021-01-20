@@ -1,7 +1,9 @@
 package selenium.user;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,18 +14,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginTest {
-    WebDriver driver;
+    private WebDriver driver;
+
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @Before
-    public void startDriver() {
-        System.setProperty("webdriver.chrome.driver", "c:\\selenium-drivers\\Chrome\\chromedriver.exe");
+    public void setupTest() {
         driver = new ChromeDriver();
         driver.get("https://ta-ebookrental-fe.herokuapp.com/login");
     }
 
     @After
-    public void tearDown() {
-        driver.quit();
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
