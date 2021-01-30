@@ -1,18 +1,20 @@
 package selenium.page;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class HomePage {
 
-    @FindBy(how= How.CSS, using = "h2.sub-title" )
-    private SelenideElement pageTitle;
+    protected static final By pageTitle = By.cssSelector("h2.sub-title");
+
+    private final WebDriver driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public boolean isHomePage() {
-
         String correctContentAfterLog = "Titles catalog";
-
-        return pageTitle != null && correctContentAfterLog.equalsIgnoreCase(pageTitle.getText());
+        return correctContentAfterLog.equalsIgnoreCase(driver.findElement(pageTitle).getText());
     }
 }

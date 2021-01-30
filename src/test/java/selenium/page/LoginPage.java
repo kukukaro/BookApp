@@ -1,36 +1,33 @@
 package selenium.page;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 
-    @FindBy(how= How.CSS, using = "input[name=\"login\"]" )
-    private SelenideElement loginInput;
+    private final By loginInput = By.cssSelector("input[name=\"login\"]");
+    private final By passwordInput = By.cssSelector("input[name=\"password\"]");
+    private final By signUpButton = By.cssSelector("button[id=\"login-btn\"]");
+    private final By alertMessage = By.cssSelector("p[class=\"alert__content\"]");
 
-    @FindBy(how= How.CSS, using = "input[name=\"password\"]" )
-    private SelenideElement passwordInput;
+    private WebDriver driver;
 
-    @FindBy(how= How.CSS, using = "button[id=\"login-btn\"]" )
-    private SelenideElement signUpButton;
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+    }
 
-
-    public HomePage logInSuccessfully(String userName, String password){
+    public HomePage logInSuccessfully(String userName, String password) {
 
         setUserName(userName);
         setPassword(password);
         clickLoginButton();
 
-        loginInput.shouldNotBe(Condition.visible, Duration.of(10, ChronoUnit.SECONDS));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(signUpButton));
 
-        HomePage homePage = Selenide.page(HomePage.class);
-        return homePage;
+        return new HomePage(driver);
     }
 
     public LoginPage logInUnsuccessfully(String userName, String password) {
@@ -42,18 +39,21 @@ public class LoginPage {
     }
 
     private void setUserName(String userName) {
-        loginInput.setValue(userName);
+        driver.findElement(loginInput).sendKeys(userName);
     }
 
     private void setPassword(String password) {
-        passwordInput.setValue(password);
+        driver.findElement(passwordInput).sendKeys(password);
     }
 
     private void clickLoginButton() {
-        signUpButton.click();
+        driver.findElement(signUpButton).click();
     }
 
     public String getAlertMessage() {
-        return Selenide.$("p[class=\"alert__content\"]").getText();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessage));
+        return driver.findElement(alertMessage).getText();
     }
 }

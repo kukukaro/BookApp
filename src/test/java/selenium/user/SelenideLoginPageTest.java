@@ -31,7 +31,7 @@ public class SelenideLoginPageTest {
         String userName = "karo1";
         String password = "karo11";
 
-        LoginPage loginPage = fillLoginFormAndSend(userName, password);
+        LoginPage loginPage = unsuccessfulLogin(userName, password);
 
         String loginFailedMessage = "Login failed";
 
@@ -47,7 +47,7 @@ public class SelenideLoginPageTest {
         String userName = "karo1";
         String password = "";
 
-        LoginPage loginPage = fillLoginFormAndSend(userName, password);
+        LoginPage loginPage = unsuccessfulLogin(userName, password);
 
         String loginFailedMessage = "You can't leave fields empty";
 
@@ -61,7 +61,7 @@ public class SelenideLoginPageTest {
         String userName = "";
         String password = "karo1";
 
-        LoginPage loginPage = fillLoginFormAndSend(userName, password);
+        LoginPage loginPage = unsuccessfulLogin(userName, password);
 
         String loginFailedMessage = "You can't leave fields empty";
 
@@ -75,7 +75,7 @@ public class SelenideLoginPageTest {
         String userName = "";
         String password = "";
 
-        LoginPage loginPage = fillLoginFormAndSend(userName, password);
+        LoginPage loginPage = unsuccessfulLogin(userName, password);
 
         String loginFailedMessage = "You can't leave fields empty";
 
@@ -83,7 +83,7 @@ public class SelenideLoginPageTest {
         assertThat(isPassed).isTrue();
     }
 
-    private LoginPage fillLoginFormAndSend(String userName, String password) {
+    private LoginPage unsuccessfulLogin(String userName, String password) {
         LoginPage loginPage = new LoginPage();
         return loginPage.open().logInUnsuccessfully(userName, password);
     }
