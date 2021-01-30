@@ -1,25 +1,26 @@
 package selenium.user;
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.Configuration;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import selenium.page.HomePage;
-import selenium.page.LoginPage;
+import selenium.selenide.HomePage;
+import selenium.selenide.LoginPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginPageTest {
+public class SelenideLoginPageTest {
+
+    @BeforeClass
+    public static void setUp() {
+        Configuration.baseUrl = "https://ta-ebookrental-fe.herokuapp.com/";
+    }
 
     @Test
     public void logWithValidData() {
-
         String userName = "karo1";
         String password = "karo111";
 
-        Selenide.open("https://ta-ebookrental-fe.herokuapp.com/login");
-
-        LoginPage loginPage = Selenide.page(LoginPage.class);
-        HomePage homePage = loginPage.logInSuccessfully(userName, password);
-
+        HomePage homePage = new LoginPage().open().logInSuccessfully(userName, password);
         assertThat(homePage.isHomePage()).isTrue();
 
     }
@@ -83,10 +84,7 @@ public class LoginPageTest {
     }
 
     private LoginPage fillLoginFormAndSend(String userName, String password) {
-        Selenide.open("https://ta-ebookrental-fe.herokuapp.com/login");
-
-        LoginPage loginPage = Selenide.page(LoginPage.class);
-        loginPage.logInUnsuccessfully(userName, password);
-        return loginPage;
+        LoginPage loginPage = new LoginPage();
+        return loginPage.open().logInUnsuccessfully(userName, password);
     }
 }
