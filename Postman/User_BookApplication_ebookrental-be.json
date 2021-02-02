@@ -141,7 +141,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \r\n}",
+									"raw": "{\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -189,6 +189,38 @@
 									"path": [
 										"user",
 										"register"
+									]
+								},
+								"description": "Register new user with valid data: login, password"
+							},
+							"response": []
+						},
+						{
+							"name": "Register_on_wrong_endpoint",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\": \"karo1\",\r\n    \"password\": \"karo1\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://ta-ebookrental-be.herokuapp.com/user/register/dummy",
+									"protocol": "https",
+									"host": [
+										"ta-ebookrental-be",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"user",
+										"register",
+										"dummy"
 									]
 								},
 								"description": "Register new user with valid data: login, password"
@@ -269,7 +301,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"login\": \"karo1\",\r\n    \"password\": \"karo1\"\r\n}\r\n",
+									"raw": "{\r\n    \"login\": \"test1\",\r\n    \"password\": \"test1\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
