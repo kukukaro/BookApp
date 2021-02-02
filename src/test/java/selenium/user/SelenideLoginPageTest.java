@@ -27,60 +27,39 @@ public class SelenideLoginPageTest {
 
     @Test
     public void logWithNotMatchingPassword() {
-
         String userName = "karo1";
         String password = "karo11";
 
         LoginPage loginPage = unsuccessfulLogin(userName, password);
-
-        String loginFailedMessage = "Login failed";
-
-        boolean isPassed = loginFailedMessage.equalsIgnoreCase(loginPage.getAlertMessage());
-        assertThat(isPassed).isTrue();
+        assertThat(loginPage.getAlertMessage()).isEqualToIgnoringCase("Login failed");
     }
-
 
 
     @Test
     public void logWithEmptyPassword() {
-
         String userName = "karo1";
         String password = "";
 
         LoginPage loginPage = unsuccessfulLogin(userName, password);
-
-        String loginFailedMessage = "You can't leave fields empty";
-
-        boolean isPassed = loginFailedMessage.equalsIgnoreCase(loginPage.getAlertMessage());
-        assertThat(isPassed).isTrue();
+        assertThat(loginPage.getAlertMessage()).isEqualToIgnoringCase("You can't leave fields empty");
     }
 
     @Test
     public void logWithEmptyLogin() {
-
         String userName = "";
         String password = "karo1";
 
         LoginPage loginPage = unsuccessfulLogin(userName, password);
-
-        String loginFailedMessage = "You can't leave fields empty";
-
-        boolean isPassed = loginFailedMessage.equalsIgnoreCase(loginPage.getAlertMessage());
-        assertThat(isPassed).isTrue();
+        assertThat(loginPage.getAlertMessage()).isEqualToIgnoringCase("You can't leave fields empty");
     }
 
     @Test
     public void logWithEmptyData() {
-
         String userName = "";
         String password = "";
 
         LoginPage loginPage = unsuccessfulLogin(userName, password);
-
-        String loginFailedMessage = "You can't leave fields empty";
-
-        boolean isPassed = loginFailedMessage.equalsIgnoreCase(loginPage.getAlertMessage());
-        assertThat(isPassed).isTrue();
+        assertThat(loginPage.getAlertMessage()).isEqualToIgnoringCase("You can't leave fields empty");
     }
 
     private LoginPage unsuccessfulLogin(String userName, String password) {
