@@ -1,4 +1,4 @@
-package selenium.selenide;
+package selenide.page;
 
 import org.openqa.selenium.By;
 

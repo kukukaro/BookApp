@@ -1,4 +1,4 @@
-package selenium.selenide;
+package selenide.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;

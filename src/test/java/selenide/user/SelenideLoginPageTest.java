@@ -1,10 +1,10 @@
-package selenium.user;
+package selenide.user;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import selenium.selenide.HomePage;
-import selenium.selenide.LoginPage;
+import selenide.page.HomePage;
+import selenide.page.LoginPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
