@@ -13,8 +13,8 @@ public class LoginPage {
 
     private final By loginInput = By.cssSelector("input[name=\"login\"]");
     private final By passwordInput = By.cssSelector("input[name=\"password\"]");
-    private final By signUpButton = By.cssSelector("button[id=\"login-btn\"]");
-    private final By alertMessage = By.cssSelector("p[class=\"alert__content\"]");
+    private final By signUpButton = By.cssSelector("button#login-btn");
+    private final By alertMessage = By.cssSelector("p.alert__content");
 
     public LoginPage open() {
         Selenide.open("login");
