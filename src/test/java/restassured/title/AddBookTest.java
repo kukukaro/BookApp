@@ -259,28 +259,4 @@ public class AddBookTest extends BookAppApiTest {
 
     }
 
-    private int logInSuccessfully() {
-        String userName = "karo1";
-        String password = "karo111";
-
-        JSONObject requestBody = new JSONObject();
-        requestBody.put("login", userName);
-        requestBody.put("password", password);
-
-        Response respond = RestAssured
-                .given()
-                .basePath("user/login")
-                .contentType(ContentType.JSON)
-                .body(requestBody.toString())
-                .log().all()
-                .when()
-                .post()
-                .then()
-                .statusCode(200)
-                .extract().response();
-
-        Integer userId = respond.getBody().as(Integer.class);
-        assertThat(userId).isPositive();
-        return userId;
-    }
 }
