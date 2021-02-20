@@ -13,7 +13,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SelenideAddBookTest {
+public class AddBookTest {
     private final static String username = "karo1";
     private final static String password = "karo111";
     private HomePage homePage;
@@ -38,7 +38,7 @@ public class SelenideAddBookTest {
 
         AddBookForm newBookForm = homePage.clickAddNewButton();
         HomePage homePage = newBookForm.addNewTitleSuccessfully(title, author, year);
-        assertThat(homePage.isBookAdded(title)).isTrue();
+        assertThat(homePage.isBookAdded(title, author, year)).isTrue();
 
     }
 
