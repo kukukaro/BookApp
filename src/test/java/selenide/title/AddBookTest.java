@@ -1,15 +1,13 @@
 package selenide.title;
 
 import com.codeborne.selenide.Configuration;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import selenide.model.Book;
 import selenide.page.AddBookForm;
 import selenide.page.HomePage;
 import selenide.page.LoginPage;
-
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,49 +29,41 @@ public class AddBookTest {
 
     @Test
     public void addBookWithValidData() {
-        String title = RandomStringUtils.randomAlphabetic(6);
-        String author = RandomStringUtils.randomAlphabetic(6);
-        Random random = new Random();
-        String year = Integer.toString(random.nextInt(2022));
+        Book book = Book.createRandomBook();
 
         AddBookForm newBookForm = homePage.clickAddNewButton();
-        HomePage homePage = newBookForm.addNewTitleSuccessfully(title, author, year);
-        assertThat(homePage.isBookAdded(title, author, year)).isTrue();
+        HomePage homePage = newBookForm.addNewTitleSuccessfully(book);
+        assertThat(homePage.isBookAdded(book)).isTrue();
 
     }
 
     @Test
     public void shouldNotAddBookWithEmptyTitle() {
-        String title = "";
-        String author = RandomStringUtils.randomAlphabetic(6);
-        Random random = new Random();
-        String year = Integer.toString(random.nextInt(2022));
+        Book book = Book.createRandomBook();
+        book.setTitle("");
 
         AddBookForm newBookForm = homePage.clickAddNewButton();
-        newBookForm.addNewTitleUnsuccessfully(title, author, year);
+        newBookForm.addNewTitleUnsuccessfully(book);
         assertThat(newBookForm.getAlertMessage()).isEqualToIgnoringCase("\"title\" field shouldn't be empty...");
     }
 
     @Test
     public void shouldNotAddBookWithEmptyAuthor() {
-        String title = RandomStringUtils.randomAlphabetic(6);
-        String author = "";
-        Random random = new Random();
-        String year = Integer.toString(random.nextInt(2022));
+        Book book = Book.createRandomBook();
+        book.setAuthor("");
 
         AddBookForm newBookForm = homePage.clickAddNewButton();
-        newBookForm.addNewTitleUnsuccessfully(title, author, year);
+        newBookForm.addNewTitleUnsuccessfully(book);
         assertThat(newBookForm.getAlertMessage()).isEqualToIgnoringCase("\"author\" field shouldn't be empty...");
     }
 
     @Test
     public void shouldNotAddBookWithEmptyYear() {
-        String title = RandomStringUtils.randomAlphabetic(6);
-        String author = RandomStringUtils.randomAlphabetic(6);
-        String year = "";
+        Book book = Book.createRandomBook();
+        book.setYear("");
 
         AddBookForm newBookForm = homePage.clickAddNewButton();
-        newBookForm.addNewTitleUnsuccessfully(title, author, year);
+        newBookForm.addNewTitleUnsuccessfully(book);
         assertThat(newBookForm.getAlertMessage()).isEqualToIgnoringCase("\"year\" field shouldn't be empty...");
     }
 

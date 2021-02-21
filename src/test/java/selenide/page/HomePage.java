@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import selenide.model.Book;
 
 import java.util.Optional;
 
@@ -31,15 +32,15 @@ public class HomePage {
         return new AddBookForm();
     }
 
-    public boolean isBookAdded(String title, String author, String year) {
+    public boolean isBookAdded(Book book) {
         Selenide.sleep(1000);
 
-        return findBookRow(title, author, year).isPresent();
+        return findBookRow(book.getTitle(), book.getAuthor(), book.getYear()).isPresent();
     }
 
-    public void clickRemoveButton(String title, String author, String year) {
+    public void clickRemoveButton(Book book) {
         Selenide.sleep(1000);
-        findBookRow(title, author, year).ifPresent(
+        findBookRow(book.getTitle(), book.getAuthor(), book.getYear()).ifPresent(
                 row -> row.find(removeTitleButton).click()
         );
     }
