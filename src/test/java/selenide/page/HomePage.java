@@ -19,6 +19,7 @@ public class HomePage {
     private final By addNewButton = By.cssSelector("button[name=\"add-title-button\"]");
     private final By bookTitle = By.cssSelector("div.titles-list__item__title.list__item__col.list__item__col--primary");
     private final By removeTitleButton = By.cssSelector("button.remove-btn");
+    private final By editButton = By.cssSelector("button.edit-btn");
 
 
     public boolean isHomePage() {
@@ -30,6 +31,14 @@ public class HomePage {
     public AddBookForm clickAddNewButton() {
         $(addNewButton).click();
         return new AddBookForm();
+    }
+
+    public EditBookForm clickEditButton(Book book) {
+        Selenide.sleep(1000);
+        findBookRow(book.getTitle(), book.getAuthor(), book.getYear()).ifPresent(
+                row -> row.find(editButton).click()
+        );
+        return new EditBookForm();
     }
 
     public boolean isBookAdded(Book book) {
