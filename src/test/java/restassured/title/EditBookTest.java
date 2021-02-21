@@ -9,7 +9,7 @@ import restassured.BookAppApiTest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class UpdateBookTest extends BookAppApiTest {
+public class EditBookTest extends BookAppApiTest {
 
 
     @Test
